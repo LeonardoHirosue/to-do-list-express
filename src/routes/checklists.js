@@ -46,7 +46,8 @@ router.get('/:id/edit', async (req, res) => {
 
 router.get('/:id', async (req, res) => {
     try {
-        let checklist = await Checklist.findById(req.params.id);
+        //populate seria uma ferramenta do Mongoose simular ao aggregate do MongoDB
+        let checklist = await Checklist.findById(req.params.id).populate('tasks');
         res.status(200).render('checklists/show', {checklist: checklist});
     } catch (error) {
         res.status(500).render('pages/error', {error: 'Erro ao exibir as listas de tarefas'});
