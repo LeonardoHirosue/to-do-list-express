@@ -70,9 +70,9 @@ router.delete('/:id', async (req, res) => {
     let {name} = req.body;
     try {
         let checklist = await Checklist.findByIdAndRemove(req.params.id);
-        res.status(200).send(checklist);
+        res.redirect('/checklists');
     } catch (error) {
-        res.status(422).json(error);
+        res.status(500).render('pages/error', {error: 'Erro ao deletar lista de tarefas'});
     }
 });
 

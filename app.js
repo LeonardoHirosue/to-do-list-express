@@ -14,8 +14,9 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 //habilitando arquivos estáticos no app
 app.use(express.static(path.join(__dirname, 'public')));
-//middleware para utilização de todos os métodos no formulário
-app.use(methodOverride('_method'));
+//middleware para utilização de todos os métodos no formulário (atua diretamente sobre o POST)
+//necessário passar '{methods: ['POST', 'GET']}' para sobrescrever ambos os métodos
+app.use(methodOverride('_method', {methods: ['POST', 'GET']}));
 
 app.set('views', path.join(__dirname, './src/views'));
 app.set('view engine', 'ejs');
